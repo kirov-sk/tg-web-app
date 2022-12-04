@@ -365,7 +365,42 @@
         $('.viewport_border').attr('text', window.innerWidth + ' x ' + round(Telegram.WebApp.viewportHeight, 2));
         $('.viewport_stable_border').attr('text', window.innerWidth + ' x ' + round(Telegram.WebApp.viewportStableHeight, 2) + ' | is_expanded: ' + (Telegram.WebApp.isExpanded ? 'true' : 'false'));
     }
+const start_go = () => {
+const GOOGLE_API_KEY = 'e200b00169f320825330ab5e5321f59e1e2ff825';
+gapi.client.init({
+    apiKey: "46790c0f6656cb4d804adb955c478fb0ef371865",
+    discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+  }).then(() => {
+    return gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: '1kOlK36GWoxqMBSf2nzwsxuY7O1KKPS1FoPzC_7BlxJI',
+      range: 'DATA!A1:E10', // for example: List 1!A1:B6
+    });
+  }).then((response) => {
+    // parse the response data
+    const loadedData = response.result.values;
+    console.log(loadedData);
+    // populate the HTML table with the data
+//     const table = document.getElementsByTagName('table')[];
+    
+//     // add column headers
+//     const columnHeaders = document.createElement('tr');
+//     columnHeaders.innerHTML = `<th>${loadedData[][]}</th>
+// <th>${loadedData[][1]}</th>`;
+//     table.appendChild(columnHeaders);
 
+//     // add table data rows
+//     for (let i = 1; i < loadedData.length; i++) {
+//       const tableRow = document.createElement('tr');
+//       tableRow.innerHTML = `<td>${loadedData[i][]}</td>
+// <td>${loadedData[i][1]}</td>`;
+//       table.appendChild(tableRow);
+//    }
+  }).catch((err) => {
+    console.log(err.error.message);
+  });
+}
+
+gapi.load('client', start_go);
     Telegram.WebApp.onEvent('viewportChanged', setViewportData);
     setViewportData();
 
